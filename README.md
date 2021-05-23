@@ -2,7 +2,7 @@
 
 ### What this study uses
 
-React.js
+React.js, html, css?
 
 ### Study Goal
 
