@@ -6,7 +6,7 @@ React.js, html, css?
 
 ### Study Goal
 
-To practice React, React Native, etc...
+To practice React, React Native, frontend, etc...
 
 ## Stages
 
