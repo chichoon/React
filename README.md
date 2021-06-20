@@ -12,4 +12,3 @@ To practice React, React Native, frontend, etc...
 
 - [ ] ~ ??
   - first use of React
-- [ ] ~ 
