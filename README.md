@@ -10,5 +10,5 @@ To practice React, React Native, frontend, etc...
 
 ## Stages
 
-- [ ] ~ ??
+- [ ] ~ ???
   - first use of React
