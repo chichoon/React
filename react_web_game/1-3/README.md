@@ -44,8 +44,6 @@ class LikeButton extends React.Component {
 
 - 3번째 인자값에는 태그 안의 내용물이 들어간다 (텍스트 등..)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/baea9b2b-78f3-40f2-bda8-89741599ea5b/Untitled.png)
-
 위와 같이 버튼의 속성을 맞춰 주었을 때, 버튼을 누를 때마다 **button clicked**가 출력되는 것을 볼 수 있다
 
 ---
