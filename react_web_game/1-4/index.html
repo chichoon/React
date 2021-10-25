@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <!--React Script 불러옴 (React 사용 준비 완료)-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--ReactDOM Script 불러옴 (ReactDOM 사용 준비 완료)-->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--root div 생성 (이곳에 react, reactDOM으로 설정한 컴포넌트가 들어감)-->
+    <script type="text/babel">
+      class LikeButton extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            //이 곳에 상태 (바뀔 수 있는 값) 를 모두 적어준다
+            liked: false, //초기 상태를 일단 적어준다
+          };
+        }
+        render() {
+          return (
+            <button
+              type="submit"
+              onClick={() => {
+                this.setState({
+                  liked: this.state.liked ? false : true,
+                });
+              }}>
+              {this.state.liked ? "Liked" : "Like"}
+            </button>
+          );
+        }
+      }
+    </script>
+    <!--React에서 컴포넌트 제작함 (button 태그를 만들겠다)-->
+    <script type="text/babel">
+      ReactDOM.render(
+        <div>
+          <LikeButton />
+          <LikeButton />
+          <LikeButton />
+        </div>,
+        document.querySelector("#root")
+      );
+    </script>
+    <!--ReactDOM에서 컴포넌트 렌더링-->
+  </body>
+</html>
