@@ -27,21 +27,20 @@
         );
         const [value, setValue] = React.useState("");
         const [result, setResult] = React.useState("");
-        const [valueBefore, setValueBefore] = React.useState("");
         const inputRef = React.useRef(null);
 
         const onSubmitForm = (e) => {
           e.preventDefault();
           if (parseInt(value) === first * second) {
-            setResult("정답");
+            setResult((prevResult) => {
+              return "정답 :" + value;
+            });
             setFirst(Math.ceil(Math.random() * 9));
             setSecond(Math.ceil(Math.random() * 9));
-            setValueBefore(value);
             setValue("");
             inputRef.current.focus();
           } else {
             setResult("오답");
-            setValueBefore(value);
             setValue("");
             inputRef.current.focus();
           }
@@ -65,9 +64,7 @@
               />
               <button> 입력 </button>
             </form>
-            <div>
-              {valueBefore} {valueBefore ? "=" : ""} {result}
-            </div>
+            <div>{result}</div>
           </React.Fragment>
         );
       };
