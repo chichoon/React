@@ -90,8 +90,6 @@ html 하나만 있어도 내부에서 자바스크립트를 사용가능하지�
 
    body에 이 두 줄은 추가한다
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7c834e9-2910-403b-9ddd-8b965998a17f/Untitled.png)
-
 `npm list`를 입력하면 뭔가 설치된 것을 볼 수 있다
 
 ```bash
