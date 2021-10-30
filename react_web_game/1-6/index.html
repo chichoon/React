@@ -58,7 +58,7 @@
         };
         render() {
           return (
-            <div>
+            <React.Fragment>
               <div>
                 {this.state.first} 곱하기 {this.state.second} 는?
               </div>
@@ -74,7 +74,7 @@
                 {this.state.valueBefore} {this.state.valueBefore ? "=" : ""}{" "}
                 {this.state.result}
               </div>
-            </div>
+            </React.Fragment>
           );
         }
       }
