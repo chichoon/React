@@ -279,9 +279,9 @@ class GuGuDan extends React.Component {
 
 ---
 
-## 팁
+# 팁
 
-### Math: floor, ceil, round
+## Math: floor, ceil, round
 
 `Math.floor(숫자)` : 소수점 이하를 버림
 
@@ -289,7 +289,7 @@ class GuGuDan extends React.Component {
 
 `Math.round(숫자)` : 소수점 이하를 반올림
 
-### 괄호 종류
+## 괄호 종류
 
 `( )` 는 그룹 연산자로, 사실 있어도 없어도 똑같은 동작을 한다
 
@@ -297,11 +297,11 @@ class GuGuDan extends React.Component {
 
 `return` 시에 소괄호로 묶는 등 굳이 소괄호로 묶어줄 필요가 없다는 뜻, 다만 있으면 좀 깔끔하고 보기좋다
 
-### onSubmit과 button에서의 onClick
+## onSubmit과 button에서의 onClick
 
 `form`에서는 `onSubmit`을 쓰고, `form`이 없는 경우는 `onClick`을 쓰면?
 
-### 함수를 클래스 (컴포넌트) 내에서 정의할 때
+## 함수를 클래스 (컴포넌트) 내에서 정의할 때
 
 무조건 ⇒ (화살표) 함수 써야 한다
 
@@ -309,7 +309,7 @@ class GuGuDan extends React.Component {
 
 다만 render() 는 화살표 없이 그냥 선언해서 사용
 
-### Constructor (생성자) 가 뭔지 몰라요
+## Constructor (생성자) 가 뭔지 몰라요
 
 그럼 지워도 상관없다
 
@@ -350,21 +350,21 @@ class GuGuDan extends React.Component {
 
 이거랑 같음
 
-### 동기와 비동기
+## 동기와 비동기
 
-- 동기
+### 동기
 
-  서버에 요청을 보냈을 때 응답이 돌아와야 다음 동작을 수행할 수 있다
+서버에 요청을 보냈을 때 응답이 돌아와야 다음 동작을 수행할 수 있다
 
-  즉 A 작업이 다 끝날 때까지 B 작업은 대기해야 함
+즉 A 작업이 다 끝날 때까지 B 작업은 대기해야 함
 
-- 비동기
+### 비동기
 
-  요청을 보냈을 때 응답과 상관없이 다음 동작을 수행할 수 있다
+요청을 보냈을 때 응답과 상관없이 다음 동작을 수행할 수 있다
 
-  A 작업과 B 작업이 동시에 실행되고, A 작업은 결과값이 나오는 대로 출력된다
+A 작업과 B 작업이 동시에 실행되고, A 작업은 결과값이 나오는 대로 출력된다
 
-### 렌더링
+## 렌더링
 
 `setState`를 할 때마다 렌더링 (`render()`)이 다시 이루어진다
 
