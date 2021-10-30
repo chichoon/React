@@ -38,26 +38,32 @@
             parseInt(this.state.value) ===
             this.state.first * this.state.second
           ) {
-            this.setState((prevState) => {
-              return {
-                result: "정답",
-                first: Math.ceil(Math.random() * 9),
-                second: Math.ceil(Math.random() * 9),
-                valueBefore: prevState.value,
-                value: "",
-              };
+            this.setState({
+              result: "정답",
+              first: Math.ceil(Math.random() * 9),
+              second: Math.ceil(Math.random() * 9),
+              valueBefore: this.state.value,
+              value: "",
             });
+            this.input.focus();
           } else {
             this.setState({
               result: "오답",
               valueBefore: this.state.value,
               value: "",
             });
+            this.input.focus();
           }
         };
         onChange = (e) => {
           this.setState({ value: e.target.value });
         };
+        onRefInput = (c) => {
+          this.input = c;
+        };
+
+        input;
+
         render() {
           return (
             <React.Fragment>
@@ -66,6 +72,7 @@
               </div>
               <form onSubmit={this.onSubmit}>
                 <input
+                  ref={this.onRefInput}
                   type="number"
                   value={this.state.value}
                   onChange={this.onChange}
