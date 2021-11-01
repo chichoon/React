@@ -4,7 +4,13 @@ const { Component } = React;
 class WordRelay extends Component {
   state = {};
 
-  render() {}
+  render() {
+    return (
+      <React.Fragment>
+        <div>Hello</div>
+      </React.Fragment>
+    );
+  }
 }
 
 module.exports = WordRelay;
