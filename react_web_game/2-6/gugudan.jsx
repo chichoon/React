@@ -1,3 +1,5 @@
+const React = require("react");
+
 const GuGuDan = () => {
   const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
   const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
