@@ -180,6 +180,20 @@ module.exports = {
     //입력파일
     app: ["./client.jsx", "./wordRelay.jsx"],
   },
+
+  module: {
+    //적용할 규칙
+    rules: [
+      {
+        test: /\.jsx?/,
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-react"],
+        },
+      },
+    ],
+  },
+
   output: {
     //출력파일
     path: path.join(__dirname, "dist"),
@@ -198,9 +212,41 @@ module.exports = {
 
 4. `entry`: 입력 파일들 **(중요)**
    1. `app`: 사용할 파일들 (예시와 같이 배열로 불러오면 된다)
-5. `output`: 출력 파일들 **(중요)**
+5. `module`: 입력 파일에 적용할 규칙 (이 규칙을 적용하여 출력 파일을 만든다)
+
+   1. `rules`: 실질적인 규칙의 내용
+
+      1. `test`: 규칙을 적용할 파일
+
+         예시에서 해당 규칙에는 `//` 사이에 정규표현식이 포함되어 있다
+
+         `\.`는 .을 특수문자 처리하지 않고 텍스트 일치 여부를 체크하겠다는 뜻
+
+         `jsx?` 는 js 또는 jsx와 일치하는지 판단한다
+
+         (이때 x 옆에 붙은 물음표는 x가 아예 포함되지 않거나, 무조건 들어있는 두 가지 경우를 판단한다)
+
+      2. `loader`: 사용할 로더
+      3. `options`: 적용할 추가 옵션
+         1. `presets`: 옵션 프리셋
+
+6. `output`: 출력 파일들 **(중요)**
    1. `path`: 출력 파일의 경로
    2. `filename`: 출력 파일의 이름
+
+### 바벨 설치
+
+```bash
+npm i -D @babel/core @babel/preset-env @babel/preset-react babel-loader
+```
+
+마찬가지로 개발용으로 설치
+
+**babel/core**가 바벨 본체, **babel/preset-env**가 브라우저에 맞춰 옛날 문법을 지원해주는 기능
+
+**babel/preset-react**는 jsx 등을 지원해줌
+
+**babel-loader**는 바벨과 웹팩을 연결해주는 기능
 
 ### 한 jsx 파일이 다른 jsx 파일의 모듈을 불러올 때
 
@@ -243,13 +289,57 @@ entry: {
 
 따라서 확장자도 붙일필요없다
 
+## 웹팩으로 빌드하기
+
+`webpack` 명령어만 사용하면 `command not found`라며 아무런 동작도 하지 않는 것을 볼 수 있다
+
+이는 웹팩을 현재 프로젝트 상에서만 설치했기 때문에 (가상환경처럼) 전역 명령어로 등록이 안 되어 있기 때문
+
+### package.json에 등록하기
+
+```jsx
+"scripts": {
+    "dev": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+```
+
+**package.json** 파일의 `scripts` 항목에 추가한다 (이름은 뭘로 해도 상관없다)
+
+그리고 `npm run <설정한 이름>` 으로 실행시킨다 (예시에선 `npm run dev`)
+
+내부 코드 문제로 에러가 나긴 하는데.. 아무튼 작동은 한다
+
+또한 설정한 폴더에 설정한 출력 파일 (예시에서는 app.js) 이 저장되어 있는 것을 볼 수 있다
+
+### npx 사용하기
+
+**npm**은 자바스크립트 패키지 관리 모듈, **npx**는 npm 레지스트리에 올라간 패키지를 쉽게 설치하고 관리할 수 있도록 해주는 명령어 도구이다
+
+**npm** = 패키지 관리자, **npx** = 패키지 실행기 라고 생각하면 될 듯
+
+npm 버전 5.2.0 이상이면 npx는 디폴트로 설치되어 있다
+
+프로젝트 루트 폴더에서 `npx webpack` 명령어를 입력하면 아까와 마찬가지로 실행이 잘 된다
+
+성공적으로 빌드가 되었다면 에러 없이 빌드 성공 문구가 제대로 출력되는 것을 볼 수 있다
+
+app.js 파일을 열어보면 상당히 무슨말인지 모르겠는... 코드가 있으나 아무튼 쓰면 된댄다
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="./dist/app.js"></script>
+</body>
+```
+
+`body`에서 app.js 스크립트를 불러온 html 파일도 열어보면 잘 동작을 한다
+
 ---
 
 # 여담
 
 ## npm에서 추가된 라이브러리 패키지 확인하기
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7c834e9-2910-403b-9ddd-8b965998a17f/Untitled.png)
 
 `npm list`를 입력하면 뭔가 설치된 것을 볼 수 있다
 
