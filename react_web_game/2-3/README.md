@@ -152,7 +152,7 @@ ReactDom.render(<WordRelay />, document.querySelector("#root"));
 
 옛날 방식으론 만약 2만개의 모듈이 있으면 그 중 5개만 사용하더라도 2만개를 다 불러왔어야 하는데, 지금은 모듈 시스템 덕에 딱 5개만 불러와서 사용할 수 있게 됨
 
-## 웹팩 설정하기
+# 웹팩 설정하기
 
 ```html
 <script src="./dist/app.js"></script>
@@ -164,7 +164,7 @@ html src에는 딱 하나의 js 파일만을 불러올 수 있는 것이 문제�
 
 이 때문에 웹팩을 사용한다
 
-### webpack.config.js
+## webpack.config.js
 
 웹팩은 webpack.config.js에 설정된 대로 돌아간다
 
@@ -243,7 +243,7 @@ module.exports = {
    1. `path`: 출력 파일의 경로
    2. `filename`: 출력 파일의 이름
 
-### 바벨 설치
+## 바벨 설치
 
 ```bash
 npm i -D @babel/core @babel/preset-env @babel/preset-react babel-loader
@@ -257,7 +257,7 @@ npm i -D @babel/core @babel/preset-env @babel/preset-react babel-loader
 
 **babel-loader**는 바벨과 웹팩을 연결해주는 기능
 
-### 한 jsx 파일이 다른 jsx 파일의 모듈을 불러올 때
+## 한 jsx 파일이 다른 jsx 파일의 모듈을 불러올 때
 
 ```jsx
 const React = require("react");
@@ -280,7 +280,7 @@ entry: {
 
 따라서 **wordRelay.jsx**는 굳이 불러올 필요 없다 웹팩이 알아서 하기 때문에
 
-### entry 파일의 확장자
+## entry 파일의 확장자
 
 ```jsx
 resolve: {
@@ -298,13 +298,13 @@ entry: {
 
 따라서 확장자도 붙일필요없다
 
-## 웹팩으로 빌드하기
+# 웹팩으로 빌드하기
 
 `webpack` 명령어만 사용하면 `command not found`라며 아무런 동작도 하지 않는 것을 볼 수 있다
 
 이는 웹팩을 현재 프로젝트 상에서만 설치했기 때문에 (가상환경처럼) 전역 명령어로 등록이 안 되어 있기 때문
 
-### package.json에 등록하기
+## package.json에 등록하기
 
 ```jsx
 "scripts": {
@@ -321,7 +321,7 @@ entry: {
 
 또한 설정한 폴더에 설정한 출력 파일 (예시에서는 app.js) 이 저장되어 있는 것을 볼 수 있다
 
-### npx 사용하기
+## npx 사용하기
 
 **npm**은 자바스크립트 패키지 관리 모듈, **npx**는 npm 레지스트리에 올라간 패키지를 쉽게 설치하고 관리할 수 있도록 해주는 명령어 도구이다
 
@@ -343,6 +343,56 @@ app.js 파일을 열어보면 상당히 무슨말인지 모르겠는... 코드�
 ```
 
 `body`에서 app.js 스크립트를 불러온 html 파일도 열어보면 잘 동작을 한다
+
+# @babel/preset-env
+
+```jsx
+module: {
+    rules: [
+      {
+        test: /\.jsx?/,
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-react"],
+        },
+      },
+    ],
+  },
+```
+
+`"@babel/preset-env"` 는 자동으로 옛날 브라우저를 지원해주는 모듈로, 수십 개의 플러그인들의 집합
+
+플러그인들이 많기 때문에 설정할 내용들이 많다
+
+```jsx
+presets: [
+	["@babel/preset-env",
+		{
+			targets: {
+				browsers: ["last 2 chrome versions"],
+			},
+		},],
+	"@babel/preset-react",
+],
+```
+
+`"@babel/preset-env"` 의 상세설정을 바꾸고 싶다면 먼저 대괄호 (`[]`) 를 열고 첫 번째 원소로 `"@babel/preset-env"` 를 넣고, 두 번째 원소로 중괄호 (`{}`) 를 열어 설정을 적어넣는다
+
+예시의 `targets`는 해당 코드가 지원할 환경을 적을 수 있고, 내부의 `browsers: ["last 2 chrome versions"],` 같은 경우는 최신의 두 크롬 브라우저만을 지원하겠다는 뜻이다
+
+이 설정이 중요한 이유는 옛날 브라우저일수록 지원이 힘들어지기 때문에, 바벨에서 매번 옛날 브라우저에 맞춰서 컴파일하면 바벨의 작업량이 많아져 속도가 굉장히 느려진다
+
+따라서 지원을 원하는 브라우저에서만 구동되도록 한정하는게 중요
+
+브라우저 한정을 원하지만 타겟을 어떻게 잡을지 감이 안 온다면 [링크](https://github.com/browserslist/browserslist) 참고
+
+```jsx
+targets: {
+	browsers: ["last 2 version", "> 5% in KR", "not dead"],
+},
+```
+
+만약 이렇게 타겟을 잡는다면 최신의 두 버전만, 한국 (KR) 에서 점유율 5% 넘는 것만, 죽지 않은 브라우저만 지원한다
 
 ---
 
