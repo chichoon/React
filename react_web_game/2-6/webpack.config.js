@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   name: "gugudan-setting",
@@ -11,6 +12,7 @@ module.exports = {
   entry: {
     app: ["./client"],
   },
+
   module: {
     rules: [
       {
@@ -33,6 +35,9 @@ module.exports = {
       },
     ],
   },
+
+  plugins: [new webpack.LoaderOptionsPlugin({ debug: true })],
+
   output: {
     path: path.join(__dirname, "dist"),
     filename: "app.js",
