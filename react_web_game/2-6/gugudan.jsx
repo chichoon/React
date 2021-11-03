@@ -1,11 +1,12 @@
 const React = require("react");
+const { useState, useRef } = React;
 
 const GuGuDan = () => {
-  const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
-  const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
-  const [value, setValue] = React.useState("");
-  const [result, setResult] = React.useState("");
-  const inputRef = React.useRef(null);
+  const [first, setFirst] = useState(Math.ceil(Math.random() * 9));
+  const [second, setSecond] = useState(Math.ceil(Math.random() * 9));
+  const [value, setValue] = useState("");
+  const [result, setResult] = useState("");
+  const inputRef = useRef(null);
 
   const onSubmitForm = (e) => {
     e.preventDefault();
@@ -29,7 +30,7 @@ const GuGuDan = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div>
         {first} 곱하기 {second} 는?
       </div>
@@ -43,6 +44,8 @@ const GuGuDan = () => {
         <button> 입력 </button>
       </form>
       <div>{result}</div>
-    </React.Fragment>
+    </>
   );
 };
+
+module.exports = GuGuDan;
