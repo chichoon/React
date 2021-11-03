@@ -24,7 +24,7 @@ module.exports = {
               "@babel/preset-env",
               {
                 targets: {
-                  browsers: ["last 2 version", "> 1%", "not dead"],
+                  browsers: ["last 2 version", "> 10% in KR", "not dead"],
                 },
                 debug: true,
               },
