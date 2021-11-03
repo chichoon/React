@@ -358,7 +358,7 @@ module.exports = {
 		[...]
   },
 
-  plugins: [], //여기
+  plugins: [new webpack.LoaderOptionsPlugin({ debug: true })], //여기
 
   output: {
 		[...]
@@ -375,6 +375,10 @@ webpack.config.js에 플러그인을 추가할 수 있다
 웹팩 공식 문서에서 서술하는 내용은 굉장히 많으나, 필수로 강조해놓은 항목은 `Entry`, `Output`, `Loaders` (`Module`), `Plugin`, `Mode` (`development` / `production`) 정도이다
 
 이 다섯 개만 알아도 웹팩의 90%는 한 거니까 겁먹지 마세요
+
+순서대로 작업하면 흐름을 알기 쉬워 편하다 (엔트리의 입력 파일들에 모듈을 적용, 추가적으로 플러그인을 적용, 출력파일 내보냄)
+
+또한 위의 5개 항목 외의 기타 설정들은 **config.js**의 최상단에 몰아넣어 깔끔하게 만드세요
 
 ## 순서대로 작업하면 흐름을 알기 쉬워 편하다 (엔트리의 입력 파일들에 모듈을 적용, 추가적으로 플러그인을 적용, 출력파일 내보냄)
 
@@ -408,7 +412,7 @@ path: path.join(__dirname, "dist"),
 
 따라서 해당 라인은 `path: '<현재경로>/dist'` 로 설정해주는것
 
-## @babel/preset-env
+## @babel/preset-env 설정
 
 ```jsx
 module: {
