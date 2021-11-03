@@ -344,7 +344,71 @@ app.js 파일을 열어보면 상당히 무슨말인지 모르겠는... 코드�
 
 `body`에서 app.js 스크립트를 불러온 html 파일도 열어보면 잘 동작을 한다
 
-# @babel/preset-env
+# 웹팩 플러그인
+
+```jsx
+module.exports = {
+	[...]
+
+  entry: {
+    app: ["./client"],
+  },
+
+  module: {
+		[...]
+  },
+
+  plugins: [], //여기
+
+  output: {
+		[...]
+  },
+};
+```
+
+webpack.config.js에 플러그인을 추가할 수 있다
+
+토이 프로젝트에선 잘 안쓰는것같아도 실무에선 은근 자주 쓰이는 편
+
+플러그인을 만났을 때 한번 해당 항목 (`plugins`) 을 다 빼 보고 `rules`도 지워버린 다음에 에러 메시지를 참고하면서 필요한 `rules`와 `plugins`를 추가하는 게 좋다
+
+웹팩 공식 문서에서 서술하는 내용은 굉장히 많으나, 필수로 강조해놓은 항목은 `Entry`, `Output`, `Loaders` (`Module`), `Plugin`, `Mode` (`development` / `production`) 정도이다
+
+이 다섯 개만 알아도 웹팩의 90%는 한 거니까 겁먹지 마세요
+
+## 순서대로 작업하면 흐름을 알기 쉬워 편하다 (엔트리의 입력 파일들에 모듈을 적용, 추가적으로 플러그인을 적용, 출력파일 내보냄)
+
+# 여담
+
+## npm에서 추가된 라이브러리 패키지 확인하기
+
+`npm list`를 입력하면 뭔가 설치된 것을 볼 수 있다
+
+## path 라이브러리
+
+```jsx
+const path = require("path");
+
+[...]
+
+path: path.join(__dirname, "dist"),
+```
+
+`path` 라이브러리는 node 설치 시 내장되어있는 라이브러리
+
+`require` (`#include`나 `fromimport`와 비슷하다) 을 통해 `path` 라이브러리를 불러온다
+
+`path.join()` 함수를 통해 경로를 합칠 수 있다 (파이썬의 그것과 매우 유사)
+
+`__dirname` 은 현재 경로가 들어간다
+
+```jsx
+path: path.join(__dirname, "dist"),
+```
+
+따라서 해당 라인은 `path: '<현재경로>/dist'` 로 설정해주는것
+
+## @babel/preset-env
 
 ```jsx
 module: {
@@ -393,35 +457,3 @@ targets: {
 ```
 
 만약 이렇게 타겟을 잡는다면 최신의 두 버전만, 한국 (KR) 에서 점유율 5% 넘는 것만, 죽지 않은 브라우저만 지원한다
-
----
-
-# 여담
-
-## npm에서 추가된 라이브러리 패키지 확인하기
-
-`npm list`를 입력하면 뭔가 설치된 것을 볼 수 있다
-
-## path 라이브러리
-
-```jsx
-const path = require("path");
-
-[...]
-
-path: path.join(__dirname, "dist"),
-```
-
-`path` 라이브러리는 node 설치 시 내장되어있는 라이브러리
-
-`require` (`#include`나 `fromimport`와 비슷하다) 을 통해 `path` 라이브러리를 불러온다
-
-`path.join()` 함수를 통해 경로를 합칠 수 있다 (파이썬의 그것과 매우 유사)
-
-`__dirname` 은 현재 경로가 들어간다
-
-```jsx
-path: path.join(__dirname, "dist"),
-```
-
-따라서 해당 라인은 `path: '<현재경로>/dist'` 로 설정해주는것
