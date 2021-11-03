@@ -317,8 +317,6 @@ entry: {
 
 그리고 `npm run <설정한 이름>` 으로 실행시킨다 (예시에선 `npm run dev`)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/80ed2801-cd13-4e2d-b5f0-654fd207dec1/Untitled.png)
-
 내부 코드 문제로 에러가 나긴 하는데.. 아무튼 작동은 한다
 
 또한 설정한 폴더에 설정한 출력 파일 (예시에서는 app.js) 이 저장되어 있는 것을 볼 수 있다
@@ -331,11 +329,7 @@ entry: {
 
 npm 버전 5.2.0 이상이면 npx는 디폴트로 설치되어 있다
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5c305452-36cb-445e-ba94-aff0653b40a4/Untitled.png)
-
 프로젝트 루트 폴더에서 `npx webpack` 명령어를 입력하면 아까와 마찬가지로 실행이 잘 된다
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/602e7d6f-b211-46d6-bae1-48ae16e339ab/Untitled.png)
 
 성공적으로 빌드가 되었다면 에러 없이 빌드 성공 문구가 제대로 출력되는 것을 볼 수 있다
 
@@ -348,8 +342,6 @@ app.js 파일을 열어보면 상당히 무슨말인지 모르겠는... 코드�
 </body>
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fab2c82b-2077-4f2e-b98c-427c996cffaf/Untitled.png)
-
 `body`에서 app.js 스크립트를 불러온 html 파일도 열어보면 잘 동작을 한다
 
 ---
@@ -357,8 +349,6 @@ app.js 파일을 열어보면 상당히 무슨말인지 모르겠는... 코드�
 # 여담
 
 ## npm에서 추가된 라이브러리 패키지 확인하기
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7c834e9-2910-403b-9ddd-8b965998a17f/Untitled.png)
 
 `npm list`를 입력하면 뭔가 설치된 것을 볼 수 있다
 
