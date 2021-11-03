@@ -24,6 +24,7 @@ module.exports = {
                 targets: {
                   browsers: ["last 2 version", "> 1%", "not dead"],
                 },
+                debug: true,
               },
             ],
             "@babel/preset-react",
