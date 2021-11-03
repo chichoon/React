@@ -103,8 +103,7 @@ npm start
 
 ```jsx
 const React = require("react"); //쓰이는 애들 추가하기
-const { Component } = React; //React에서 Component만 뜯어옴
-//Python으로 치면 from React import Component
+const { Component } = React;
 
 class WordRelay extends Component {
   state = {};
@@ -126,6 +125,15 @@ module.exports = WordRelay;
 ( `module.exports = WordRelay;` 라인)
 
 이것이 바로 node에서의 모듈 시스템
+
+```jsx
+const { Component } = React;
+const { useState, useRef } = React;
+```
+
+또한 `React.Component`나 `React.useState` 이렇게 앞에 일일히 `React`를 붙이기 귀찮다면 이렇게 사용할 라이브러리만 따로 불러올 수도 있다
+
+이렇게 하면 `Component`, `useState` 처럼 모듈 그 자체만 쓸 수 있음
 
 ### 모듈 불러오기
 
