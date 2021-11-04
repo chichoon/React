@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
   name: "wordrelay-setting", //설정의 이름
@@ -34,16 +35,26 @@ module.exports = {
             ],
             "@babel/preset-react",
           ],
+          plugins: [
+            "@babel/plugin-proposal-class-properties",
+            "react-refresh/babel",
+          ],
         },
       },
     ],
   },
 
-  plugins: [new webpack.LoaderOptionsPlugin({ debug: true })],
+  plugins: [new RefreshWebpackPlugin()],
 
   output: {
     //출력파일
     path: path.join(__dirname, "dist"), //__dirname은 현재 경로
     filename: "app.js",
+  },
+
+  devServer: {
+    devMiddleware: { publicPath: "/dist" },
+    static: { directory: path.resolve(__dirname) },
+    hot: true,
   },
 };
