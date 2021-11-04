@@ -1,5 +1,5 @@
-const path = require("path"); //path 라이브러리 불러오기
-//node 설치했다면 path는 자동으로 설치된다
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   name: "wordrelay-setting", //설정의 이름
@@ -22,11 +22,24 @@ module.exports = {
         //정규표현식에 의하면, .js까지는 무조건 매치되어야 하고 x는 x가 존재하거나 존재하지 않는 경우만 판단
         loader: "babel-loader",
         options: {
-          presets: ["@babel/preset-env", "@babel/preset-react"],
+          presets: [
+            [
+              "@babel/preset-env",
+              {
+                targets: {
+                  browsers: ["last 2 version", "> 10% in KR", "not dead"],
+                },
+                debug: true,
+              },
+            ],
+            "@babel/preset-react",
+          ],
         },
       },
     ],
   },
+
+  plugins: [new webpack.LoaderOptionsPlugin({ debug: true })],
 
   output: {
     //출력파일
