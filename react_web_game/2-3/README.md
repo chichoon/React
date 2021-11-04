@@ -380,7 +380,107 @@ webpack.config.js에 플러그인을 추가할 수 있다
 
 또한 위의 5개 항목 외의 기타 설정들은 **config.js**의 최상단에 몰아넣어 깔끔하게 만드세요
 
-## 순서대로 작업하면 흐름을 알기 쉬워 편하다 (엔트리의 입력 파일들에 모듈을 적용, 추가적으로 플러그인을 적용, 출력파일 내보냄)
+# 웹팩 데브서버와 핫 리로딩
+
+## 핫 리로딩 설정 (react-refresh)
+
+```bash
+npm i react-refresh @pmmmwh/react-refresh-webpack-plugin -D
+# 오류 발생시에 뒤에 --save --legacy-peer-deps 추가
+npm i -D webpack-dev-server
+```
+
+`react-refresh`와 `react-refresh-webpack-plugin`은 리로딩 플러그인
+
+`webpack-dev-server`는 개발용 서버
+
+```jsx
+"scripts": {
+	"dev": "webpack serve --env development",
+	"test": "echo \"Error: no test specified\" && exit 1"
+},
+```
+
+**package.json**의 script 부분을 다음과 같이 바꿔준다
+
+(`npm run dev` 시에 웹팩 서버를 실행시키도록 하는 명령어 라인)
+
+```jsx
+const path = require("path");
+const webpack = require("webpack");
+const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+```
+
+**webpack.config.js**의 맨 위에 다음과 같은 한 줄을 추가한다 (변수명은 맘대로)
+
+```jsx
+plugins: [new RefreshWebpackPlugin()],
+```
+
+**webpack.config.js**의 `plugins` 항목에 아까 지정한 변수를 불러온다
+
+이렇게 해서 플러그인이 장착되었다
+
+```jsx
+loader: "babel-loader",
+	options: {
+		presets: [
+			[
+				"@babel/preset-env",
+				{
+					targets: {
+					browsers: ["last 2 version", "> 10% in KR", "not dead"],
+					},
+				debug: true,
+				},
+			],
+			"@babel/preset-react",
+		],
+		plugins: [
+			"@babel/plugin-proposal-class-properties",
+			"react-refresh/babel",
+		],
+[...]
+```
+
+그리고 **webpack.config.js**의 `babel-loader`의 `plugins` 항목에 `"react-refresh/babel"` 를 추가한다
+
+이렇게 함으로써 바벨이 최신 문법을 옛날 자바스크립트로 변환하면서 핫 리로딩 기능까지 추가한다
+
+## 개발 서버 (dev server) 설정
+
+```jsx
+devServer: {
+	devMiddleware: { publicPath: "/dist" },
+	static: { directory: path.resolve(__dirname) },
+	hot: true,
+},
+```
+
+**webpack.config.js**의 맨 뒤에 (`output` 다음) 다음과 같은 항목을 추가한다
+
+강의내용에는 `publicPath` 속성을 추가하라고 나오나, 이는 더이상 사용되지 않고 위와 같이 지정해주면 된다
+
+`devMiddleware`는 publicPath 속성을 품고 있는 상위 속성
+
+웹팩 명령어가 실행되면 dist 폴더 내 메모리에 웹팩이 빌드한 파일들이 저장된다
+
+dev 서버에서는 메모리에 변경점을 저장한다 (가상 경로)
+
+`static`은 사용되는 정적 파일들 (Index.html 등) 이 위치한 경로를 지정해 주면 된다
+
+저렇게 지정하지 않으면 `cannot get /` 에러가 나옴
+
+### 동작 방식
+
+1. **webpack.config.js**에 적어준 대로 빌드함
+2. 빌드의 결과물을 `publicPath`에 명시해준 경로에 저장해둠
+
+   다만 publicPath 속성이 더이상 사용되지 않는 것으로 보아 다른 경로가 있는듯
+
+3. **index.html**을 실행하면 2에서 저장한 결과물을 제공함,
+
+   webpack-server의 기능으로 소스코드에 변경점이 있는지 감지할 수 있어 코드에 변화가 생기면 즉각 바뀐 결과물을 받을 수 있음
 
 # 여담
 
