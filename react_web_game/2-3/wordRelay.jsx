@@ -1,61 +1,44 @@
-const React = require("react"); //쓰이는 패키지 라이브러리 추가하기
-const { Component } = React;
+const React = require("react");
+const { useState, useRef } = React;
 
-class WordRelay extends Component {
-  state = {
-    word: "감자탕",
-    value: "",
-    result: "",
-    resultList: "감자탕",
-  };
+const WordRelay = () => {
+  const [word, setWord] = useState("감자탕");
+  const [value, setValue] = useState("");
+  const [result, setResult] = useState("");
+  const [resultList, setResultList] = useState("감자탕");
+  const inputRef = useRef(null);
 
-  onSubmitResult = (e) => {
+  const onSubmitResult = (e) => {
     e.preventDefault();
-    if (this.state.word[this.state.word.length - 1] === this.state.value[0]) {
-      this.setState({
-        result: "정답입니다",
-        word: this.state.value,
-        value: "",
-        resultList: this.state.resultList + " - " + this.state.value,
-      });
-      this.input.focus();
+    if (word[word.length - 1] === value[0]) {
+      setResult("정답입니다");
+      setWord(value);
+      setResultList(resultList + " - " + value);
+      setValue("");
+      inputRef.current.focus();
     } else {
-      this.setState({
-        result: "오답입니다",
-        value: "",
-      });
-      this.input.focus();
+      setResult("오답입니다");
+      setValue("");
+      inputRef.current.focus();
     }
   };
 
-  onChangeInput = (e) => {
-    this.setState({
-      value: e.currentTarget.value,
-    });
+  const onChangeInput = (e) => {
+    setValue(e.currentTarget.value);
   };
 
-  input;
-
-  onRefInput = (c) => {
-    this.input = c;
-  };
-
-  render() {
-    return (
-      <>
-        <div>{this.state.resultList}</div>
-        <br />
-        <div>현재 단어: {this.state.word}</div>
-        <form onSubmit={this.onSubmitResult}>
-          <input
-            ref={this.onRefInput}
-            value={this.state.value}
-            onChange={this.onChangeInput}></input>
-        </form>
-        <div>{this.state.result}</div>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <div>{resultList}</div>
+      <br />
+      <div>현재 단어: {word}</div>
+      <form onSubmit={onSubmitResult}>
+        <input ref={inputRef} value={value} onChange={onChangeInput} />
+        <button>클릭!</button>
+      </form>
+      <div>{result}</div>
+    </>
+  );
+};
 
 module.exports = WordRelay;
